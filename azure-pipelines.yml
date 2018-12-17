@@ -56,3 +56,9 @@ steps:
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: DockerRegistryConnection
+
+- task: Docker@1
+  displayName: 'Push an image'
+  inputs:
+    command: 'Push an image'
+    imageName: 'hub.docker.com/u/mstya/$repositoryname:$(Build.BuildId)'

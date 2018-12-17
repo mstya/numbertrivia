@@ -67,9 +67,6 @@ steps:
     dockerRegistryEndpoint: DockerRegistryConnection
     command: login
 
-#docker tag 9f676bd305a4 ubuntu:saucy
-#$ docker tag eb601b8965b8 ubuntu:raring
-
 - task: Docker@1
   displayName: 'Push an image'
   inputs:

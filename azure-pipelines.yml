@@ -43,5 +43,8 @@ steps:
 #     testRunner: VSTest
 #     testResultsFiles: '$(Agent.TempDirectory)/*.trx'
 
-- script: docker build -t $(dockerId)/$(imageName) .
-  displayName: Docker Build
+- task: Docker@1
+  displayName: 'Docker Build'
+  inputs:
+    azureSubscriptionEndpoint: 'MstyaContainerRegistry'
+    azureContainerRegistry: mstyacontainerregistry.azurecr.io

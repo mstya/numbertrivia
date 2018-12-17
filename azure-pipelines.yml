@@ -46,5 +46,5 @@ steps:
 - task: Docker@1
   displayName: 'Docker Build'
   inputs:
-    azureSubscriptionEndpoint: '54cfb10e-2e6d-4e1f-bbbf-a54d729615e4'
+    azureSubscriptionEndpoint: 'mstyacontainerregistry'
     azureContainerRegistry: mstyacontainerregistry.azurecr.io

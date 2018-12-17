@@ -11,7 +11,7 @@ namespace Tests
     {
         protected HttpClient GetClient()
         {
-            int test2;
+            int test3;
             var builder = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()

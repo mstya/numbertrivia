@@ -67,3 +67,4 @@ steps:
   inputs:
     command: 'Push an image'
     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+    includeLatestTag: true

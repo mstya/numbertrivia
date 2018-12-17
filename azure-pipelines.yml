@@ -17,27 +17,25 @@ variables:
 
 
 steps:
-- script: RESTORE
+
 - task: DotNetCoreCLI@2
+  displayName: DotNet Restore
   inputs:
     command: restore
     projects: '**/*.csproj'
 
-- script: BUILD
 - task: DotNetCoreCLI@2
   inputs:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- script: TEST
 - task: DotNetCoreCLI@2
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --logger trx'
 
-- script: TEST_PUBLISH
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest

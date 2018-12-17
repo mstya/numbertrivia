@@ -62,9 +62,15 @@ steps:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: DockerRegistryConnection
     command: login
+
 - task: Docker@1
   displayName: 'Push an image'
   inputs:
     command: 'Push an image'
     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
     includeLatestTag: true
+- task: Docker@1
+  displayName: 'Push a latest image'
+  inputs:
+    command: 'Push an image'
+    imageName: '$(Build.Repository.Name):latest'

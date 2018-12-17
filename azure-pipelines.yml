@@ -49,19 +49,26 @@ steps:
 #     azureSubscriptionEndpoint: 'mstyacontainerregistry'
 #     azureContainerRegistry: mstyacontainerregistry.azurecr.io
 
-
+# - script: docker build -t $(dockerId)/$(imageName) .
 
 - task: Docker@1
   displayName: 'Build an image'
   inputs:
+    imageName: '$(Build.Repository.Name):$(Build.BuildId)'
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: DockerRegistryConnection
+- bash: |
+    docker tag $(Build.Repository.Name):$(Build.BuildId) $(Build.Repository.Name):latest
+
 - task: Docker@1
   displayName: Login
   inputs:
     containerregistrytype: 'Container Registry'
     dockerRegistryEndpoint: DockerRegistryConnection
     command: login
+
+#docker tag 9f676bd305a4 ubuntu:saucy
+#$ docker tag eb601b8965b8 ubuntu:raring
 
 - task: Docker@1
   displayName: 'Push an image'

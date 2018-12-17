@@ -28,7 +28,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --logger trx'
+    arguments: '--logger trx'
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest

@@ -15,24 +15,30 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+
 steps:
 - task: DotNetCoreCLI@2
+  displayName: DotNet Restore
   inputs:
     command: restore
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: DotNet Build
   inputs:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: DotNet Test
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --logger trx'
+
 - task: PublishTestResults@2
+  displayName: DotNet Test Publish
   inputs:
     testRunner: VSTest
     testResultsFiles: '$(Agent.TempDirectory)/*.trx'

@@ -28,8 +28,8 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--logger trx'
+    arguments: '--configuration $(buildConfiguration) --logger trx'
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
-    testResultsFiles: '**/*Tests/*.trx'
+    testResultsFiles: '$(Agent.TempDirectory)/*.trx'

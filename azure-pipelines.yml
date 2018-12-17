@@ -66,4 +66,4 @@ steps:
   displayName: 'Push an image'
   inputs:
     command: 'Push an image'
-    imageName: '$repositoryname:$(Build.BuildId)'
+    imageName: '$(Build.Repository.Name):$(Build.BuildId)'

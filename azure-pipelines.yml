@@ -102,5 +102,5 @@ steps:
    # Use the environment variables input below to pass secret variables to this script
    ls -al
    ls -al Numbertrivia/Api/
-   docker build -t $(Build.Repository.Name):$(Build.BuildId) -t $(Build.Repository.Name):latest -f Numbertrivia/Api/ .
+   docker build -t $(Build.Repository.Name):$(Build.BuildId) -t $(Build.Repository.Name):latest -f $(Build.Repository.LocalPath)/Numbertrivia/Api/ .
    # docker push $(Build.Repository.Name):$(Build.BuildId)

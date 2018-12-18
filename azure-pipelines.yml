@@ -15,66 +15,79 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-
 steps:
+
+# DOTNET CLI
+
 # - task: DotNetCoreCLI@2
 #   displayName: DotNet Restore
 #   inputs:
 #     command: restore
 #     projects: '**/*.csproj'
-
 # - task: DotNetCoreCLI@2
 #   displayName: DotNet Build
 #   inputs:
 #     command: build
 #     projects: '**/*.csproj'
 #     arguments: '--configuration $(buildConfiguration)'
-
 # - task: DotNetCoreCLI@2
 #   displayName: DotNet Test
 #   inputs:
 #     command: test
 #     projects: '**/*Tests/*.csproj'
 #     arguments: '--configuration $(buildConfiguration) --logger trx'
-
 # - task: PublishTestResults@2
 #   displayName: DotNet Test Publish
 #   inputs:
 #     testRunner: VSTest
 #     testResultsFiles: '$(Agent.TempDirectory)/*.trx'
-
 # - task: Docker@1
 #   displayName: 'Docker Build'
 #   inputs:
 #     azureSubscriptionEndpoint: 'mstyacontainerregistry'
 #     azureContainerRegistry: mstyacontainerregistry.azurecr.io
 
-# - script: docker build -t $(dockerId)/$(imageName) .
 
+# DOCKER HUB
+# - task: Docker@1
+#   displayName: 'Build an image'
+#   inputs:
+#     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+#     containerregistrytype: 'Container Registry'
+#     dockerRegistryEndpoint: DockerRegistryConnection
+# - bash: |
+#     docker tag $(Build.Repository.Name):$(Build.BuildId) $(Build.Repository.Name):latest
+# - task: Docker@1
+#   displayName: Login
+#   inputs:
+#     containerregistrytype: 'Container Registry'
+#     dockerRegistryEndpoint: DockerRegistryConnection
+#     command: login
+# - task: Docker@1
+#   displayName: 'Push an image'
+#   inputs:
+#     command: 'Push an image'
+#     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+#     includeLatestTag: true
+# - task: Docker@1
+#   displayName: 'Push a latest image'
+#   inputs:
+#     command: 'Push an image'
+#     imageName: '$(Build.Repository.Name):latest'
+
+# AZURE CONTAINER REGISTRY
 - task: Docker@1
   displayName: 'Build an image'
   inputs:
     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: DockerRegistryConnection
-- bash: |
-    docker tag $(Build.Repository.Name):$(Build.BuildId) $(Build.Repository.Name):latest
-
 - task: Docker@1
   displayName: Login
   inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: DockerRegistryConnection
+    azureSubscriptionEndpoint: 'AzureConnection'
+    azureContainerRegistry: mstyacontainerregistry.azurecr.io
     command: login
-
 - task: Docker@1
   displayName: 'Push an image'
   inputs:
     command: 'Push an image'
     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
-    includeLatestTag: true
-- task: Docker@1
-  displayName: 'Push a latest image'
-  inputs:
-    command: 'Push an image'
-    imageName: '$(Build.Repository.Name):latest'

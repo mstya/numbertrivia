@@ -17,7 +17,7 @@ namespace Api.Controllers
             var response = await httpClient.GetAsync("http://numbersapi.com/" + number + "?json");
             var triviaResult = await response.Content.ReadAsStringAsync();
             var responseObj = JsonConvert.DeserializeObject<TriviaResponse>(triviaResult);
-            responseObj.Text += " Test Commit 1";
+            responseObj.Text += " Test Commit 2";
             return responseObj;
         }
     }

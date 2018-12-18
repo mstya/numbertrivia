@@ -18,7 +18,8 @@ namespace Api.Controllers
             var triviaResult = await response.Content.ReadAsStringAsync();
             var responseObj = JsonConvert.DeserializeObject<TriviaResponse>(triviaResult);
             responseObj.Text += " Test Commit 2";
-            return null;
+            responseObj.Text = "";
+            return responseObj;
         }
     }
 }

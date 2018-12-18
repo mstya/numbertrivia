@@ -76,18 +76,30 @@ steps:
 #     imageName: '$(Build.Repository.Name):latest'
 
 # AZURE CONTAINER REGISTRY
-- task: Docker@1
-  displayName: 'Build an image'
-  inputs:
-    imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+# - task: Docker@1
+#   displayName: 'Build an image'
+#   inputs:
+#     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+# - task: Docker@1
+#   displayName: Login
+#   inputs:
+#     azureSubscriptionEndpoint: 'AzureConnection'
+#     azureContainerRegistry: mstyacontainerregistry.azurecr.io
+#     command: login
+# - task: Docker@1
+#   displayName: 'Push an image'
+#   inputs:
+#     command: 'Push an image'
+#     imageName: '$(Build.Repository.Name):$(Build.BuildId)'
 - task: Docker@1
   displayName: Login
   inputs:
     azureSubscriptionEndpoint: 'AzureConnection'
     azureContainerRegistry: mstyacontainerregistry.azurecr.io
     command: login
-- task: Docker@1
-  displayName: 'Push an image'
-  inputs:
-    command: 'Push an image'
-    imageName: '$(Build.Repository.Name):$(Build.BuildId)'
+- bash: |
+   # Write your commands here
+   # Use the environment variables input below to pass secret variables to this script
+   docker build -t $(Build.Repository.Name):$(Build.BuildId) -t $(Build.Repository.Name):latest --name $(Build.Repository.Name):$(Build.BuildId) .
+   docker push $(Build.Repository.Name):$(Build.BuildId) 
+   displayName: 'Build, tag and push image'

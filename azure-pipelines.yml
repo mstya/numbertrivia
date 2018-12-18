@@ -101,6 +101,6 @@ steps:
    # Write your commands here
    # Use the environment variables input below to pass secret variables to this script
    # ls $(Build.Repository.LocalPath)
-   # echo 'path:' + $(Build.Repository.LocalPath)/Numbertrivia/Api/
+   echo 'path:' + $(Build.Repository.LocalPath)/Numbertrivia/Api/
    docker build -t $(Build.Repository.Name):$(Build.BuildId) -t $(Build.Repository.Name):latest -f $(Build.Repository.LocalPath)/Numbertrivia/Api/ .
    # docker push $(Build.Repository.Name):$(Build.BuildId)

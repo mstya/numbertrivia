@@ -100,6 +100,6 @@ steps:
 - bash: |
    # Write your commands here
    # Use the environment variables input below to pass secret variables to this script
-
+   ls -al
    docker build -t $(Build.Repository.Name):$(Build.BuildId) -t $(Build.Repository.Name):latest .
    # docker push $(Build.Repository.Name):$(Build.BuildId)

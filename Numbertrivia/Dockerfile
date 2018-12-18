@@ -22,7 +22,7 @@ ENTRYPOINT ["dotnet", "test", "--logger:trx"]
 
 FROM build AS test
 WORKDIR /app/Tests
-RUN dotnet test
+RUN dotnet test --logger:trx
 
 # Copy everything else and build
 #COPY . ./

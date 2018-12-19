@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2.100-sdk-nanoserver-1809 AS build
+FROM microsoft/dotnet:2.1.500-sdk-alpine3.7 AS build
 
 WORKDIR /app
 

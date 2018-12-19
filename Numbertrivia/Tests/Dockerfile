@@ -24,8 +24,8 @@ WORKDIR Tests
 
 #RUN dotnet restore
 
-RUN mkdir test-results
-VOLUME test-results
+RUN mkdir TestResults
+VOLUME TestResults
 # /app/Tests/test-results
 ENTRYPOINT ["dotnet", "test", "--logger:trx;LogFileName=mytests.trx"]
 

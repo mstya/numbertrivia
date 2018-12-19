@@ -27,4 +27,6 @@ WORKDIR Tests
 RUN mkdir test-results
 VOLUME test-results
 # /app/Tests/test-results
-ENTRYPOINT ["dotnet", "test", "--logger:trx;LogFileName=test-results/mytests.trx"]
+ENTRYPOINT ["dotnet", "test", "--logger:trx;LogFileName=mytests.trx"]
+
+#$(System.DefaultWorkingDirectory):/app/Tests/test-results

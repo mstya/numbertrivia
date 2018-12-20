@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    // [ApiController]
     public class TriviaController : Controller
     {
         [HttpGet("{number}")]
@@ -17,6 +16,7 @@ namespace Api.Controllers
             var response = await httpClient.GetAsync("http://numbersapi.com/" + number + "?json");
             var triviaResult = await response.Content.ReadAsStringAsync();
             var responseObj = JsonConvert.DeserializeObject<TriviaResponse>(triviaResult);
+            responseObj.Number = 666;
             //responseObj.Text = "ASDASDASD";
 //            responseObj.Text = "";
             return responseObj;

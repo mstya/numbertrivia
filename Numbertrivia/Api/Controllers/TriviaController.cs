@@ -17,7 +17,7 @@ namespace Api.Controllers
             var triviaResult = await response.Content.ReadAsStringAsync();
             var responseObj = JsonConvert.DeserializeObject<TriviaResponse>(triviaResult);
             //responseObj.Number = 666;
-            responseObj.Text = "666";
+            responseObj.Text = "777";
 //            responseObj.Text = "";
             return responseObj;
         }
